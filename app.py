@@ -39,16 +39,16 @@ country_code = input('Please enter the country code: ')
 #country_code = 'IT'
 url = f'https://api.openweathermap.org/data/2.5/weather?q={city_name},{country_code}&appid={api_key}'
 res = requests.get(url)
-print(res.json())
+data = res.json()
+print(data)
 
 
-image = Image.open('rain.jpeg')
+# Parse the JSON data and update the labels with the weather data
 
-photo = ImageTk.PhotoImage(image)
 
-label = Label(root, image=photo)
-label.pack()
-
+location = data['coord']
+weather = data['weather'][0]['main'] + ' ' + data['weather'][0]['description']
+temperature = data['main']
 
 
 
