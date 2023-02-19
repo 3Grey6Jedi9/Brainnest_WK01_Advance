@@ -26,8 +26,8 @@ humidity_label = Label(root, text="Humidity")
 humidity_label.pack()
 wind_label = Label(root, text="Wind Speed")
 wind_label.pack()
-forecast_label = Label(root, text="Forecast")
-forecast_label.pack()
+#forecast_label = Label(root, text="Forecast")
+#forecast_label.pack()
 
 
 #Making the API call to OpenWeatherMap
@@ -48,12 +48,24 @@ print(data)
 
 location = data['coord']
 weather = data['weather'][0]['main'] + ' ' + data['weather'][0]['description']
-temperature = data['main']
+temperature = ''
+humidity = ''
+wind_speed = ''
+icon_url = ''
+#icon_res = requests.get(icon_url)
+#img_data = icon_res.content
+#img = ImageTk.PhotoImage(Image.open(BytesIO))
+location_label.config(text=location)
+weather_label.config(text=weather)
+temperature_label.config(text=temperature)
+humidity_label.config(text=humidity)
+wind_label.config(text=wind_label)
 
 
 
-
-
+now = datetime.now()
+time_label = Label(root, text=f'Current time: {now.strftime("%d/%m/%Y %H:%M:%S")}')
+time_label.pack()
 
 
 root.mainloop()
