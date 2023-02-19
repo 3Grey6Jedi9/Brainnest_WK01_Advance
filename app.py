@@ -1,5 +1,7 @@
-tryr = 'jkjkjkkj'
+import tkinter as tk
 
-a = 3
+root = tk.Tk()
 
-b = 2
+root.geometry("1000x1000")
+
+root.mainloop()
