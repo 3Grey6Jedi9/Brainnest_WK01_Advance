@@ -10,8 +10,8 @@ d = {'coord': {'lon': 12.4839, 'lat': 41.8947}, 'weather': [{'id': 803, 'main': 
 location = d['coord']
 weather = d['weather'][0]['main'] + '. ' + 'The have ' + d['weather'][0]['description']
 temperature = str(round(d['main']['temp'] - 273.15, 2)) + 'ºC'
-humidity = ''
-wind_speed = ''
+humidity = d['main']['humidity']
+wind_speed = d['wind']['speed']
 
 print(location, weather, temperature, humidity, wind_speed)
 
