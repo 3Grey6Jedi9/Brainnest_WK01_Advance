@@ -204,7 +204,7 @@ class Weather():
         w_index = weather_options.index(weather_value)
         img = img_options[w_index]
         image_weather = Image.open(img)
-        resized_image = image_weather.resize((200, 200))
+        resized_image = image_weather.resize((400, 400))
         tk_image_weather = ImageTk.PhotoImage(resized_image)
         self.image_weather_label = Label(self.mainframe, image=tk_image_weather)
         self.image_weather_label.image = tk_image_weather
