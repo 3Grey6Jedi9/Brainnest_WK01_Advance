@@ -70,6 +70,9 @@ class Weather():
         location_text.grid(row=3, column=2, sticky='ew')
 
 
+    def input_data(self):
+        pass
+
 
 
 
