@@ -17,7 +17,6 @@ class Weather():
         self.build_grid()
         self.build_buttons()
         self.build_labels()
-        self.request_info()
 
 
     def build_grid(self):
@@ -65,7 +64,10 @@ class Weather():
 
 
     def request_info(self):
-        pass
+        location_text = Text(self.mainframe, height=2, width=20)
+        location = 'Super cool Example'
+        location_text.insert(END, location)
+        location_text.grid(row=3, column=2, sticky='ew')
 
 
 
