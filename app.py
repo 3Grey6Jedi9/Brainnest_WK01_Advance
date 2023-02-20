@@ -68,4 +68,5 @@ time_label = Label(root, text=f'Current time: {now.strftime("%d/%m/%Y %H:%M:%S")
 time_label.pack()
 
 
-root.mainloop()
+if __name__ == '__main__':
+    root.mainloop()
