@@ -46,11 +46,14 @@ class Weather():
 
     def build_buttons(self):
 
-        self.weather_info_button = tk.Button(self.mainframe, text='Weather Info', command=self.request_info)
+        self.weather_info_button = tk.Button(self.mainframe, text='Current Weather Info', command=self.request_info)
         self.weather_info_button.grid(row=10, column=1, sticky='nsew', pady=10, padx=10)
 
         self.country_codes_info_button = tk.Button(self.mainframe, text='Country Codes Info', command=self.info)
         self.country_codes_info_button.grid(row=1, column=3, sticky='nsew', pady=10, padx=10)
+
+        self.weather_forecast_button = tk.Button(self.mainframe, text='Forecast', command=self.forecast)
+        self.weather_forecast_button.grid(row=10, column=2, sticky='nsew', pady=10, padx=10)
 
 
     def build_labels(self):
@@ -127,6 +130,10 @@ class Weather():
     def info(self):
         url = "https://www.iso.org/obp/ui/#search"
         webbrowser.open_new_tab(url)
+
+
+    def forecast(self):
+        pass
 
 
 
