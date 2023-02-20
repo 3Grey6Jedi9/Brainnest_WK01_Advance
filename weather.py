@@ -47,8 +47,20 @@ class Weather():
         self.weather_info_button.grid(row=9, column=1, sticky='ew')
 
     def build_labels(self):
-        city_label = Label(self.mainframe, text='City:', font=('Arial', 21))
+        city_label = Label(self.mainframe, text='City:', font=('Arial', 21), bg='blue', fg='white')
         city_label.grid(row=0, column=1, sticky='ew')
+        country_label = Label(self.mainframe, text='Country:', font=('Arial', 21), bg='green', fg='white')
+        country_label.grid(row=1, column=1, sticky='ew')
+        location_label = Label(self.mainframe, text='Location:', font=('Arial', 21), bg='blue', fg='white')
+        location_label.grid(row=3, column=1, sticky='ew')
+        temperature_label = Label(self.mainframe, text='Temperature:', font=('Arial', 21), bg='blue', fg='white')
+        temperature_label.grid(row=4, column=1, sticky='ew')
+        wind_label = Label(self.mainframe, text='Wind Speed:', font=('Arial', 21), bg='blue', fg='white')
+        wind_label.grid(row=5, column=1, sticky='ew')
+        humidity_label = Label(self.mainframe, text='Humidity:', font=('Arial', 21), bg='blue', fg='white')
+        humidity_label.grid(row=6, column=1, sticky='ew')
+        date_label = Label(self.mainframe, text='Date:', font=('Arial', 21), bg='blue', fg='white')
+        date_label.grid(row=8, column=1, sticky='ew')
 
 
 
