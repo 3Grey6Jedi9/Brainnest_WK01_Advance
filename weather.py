@@ -24,7 +24,7 @@ class Weather():
         self.input_country = Entry(self.mainframe)
         self.input_country.grid(row=1, column=2)
         self.input_forecast = Entry(self.mainframe)
-        self.input_forecast.grid(row=10, column=3)
+        self.input_forecast.grid(row=11, column=3)
 
 
     def build_grid(self):
@@ -44,18 +44,20 @@ class Weather():
         self.mainframe.rowconfigure(8, weight=1)
         self.mainframe.rowconfigure(9, weight=1)
         self.mainframe.rowconfigure(10, weight=1)
+        self.mainframe.rowconfigure(11, weight=1)
+
 
 
     def build_buttons(self):
 
         self.weather_info_button = tk.Button(self.mainframe, text='Current Weather Info', command=self.request_info)
-        self.weather_info_button.grid(row=10, column=1, sticky='nsew', pady=10, padx=10)
+        self.weather_info_button.grid(row=11, column=1, sticky='nsew', pady=10, padx=10)
 
         self.country_codes_info_button = tk.Button(self.mainframe, text='Country Codes Info', command=self.info)
         self.country_codes_info_button.grid(row=1, column=3, sticky='nsew', pady=10, padx=10)
 
         self.weather_forecast_button = tk.Button(self.mainframe, text='Forecast', command=self.forecast)
-        self.weather_forecast_button.grid(row=10, column=2, sticky='nsew', pady=10, padx=10)
+        self.weather_forecast_button.grid(row=11, column=2, sticky='nsew', pady=10, padx=10)
 
 
     def build_labels(self):
@@ -63,21 +65,23 @@ class Weather():
         city_label.grid(row=0, column=1, sticky='ew')
         country_label = Label(self.mainframe, text='Country:', font=('Arial', 21), bg='green', fg='white')
         country_label.grid(row=1, column=1, sticky='ew')
-        location_label = Label(self.mainframe, text='Location:', font=('Arial', 21), bg='blue', fg='white')
+        location_label = Label(self.mainframe, text='Location:', font=('Arial', 21), bg='brown', fg='white')
         location_label.grid(row=3, column=1, sticky='ew')
-        weather_label = Label(self.mainframe, text='Weather:', font=('Arial', 21), bg='blue', fg='white')
+        weather_label = Label(self.mainframe, text='Weather:', font=('Arial', 21), bg='light blue', fg='white')
         weather_label.grid(row=4, column=1, sticky='ew')
-        temperature_label = Label(self.mainframe, text='Temperature:', font=('Arial', 21), bg='blue', fg='white')
+        temperature_label = Label(self.mainframe, text='Temperature:', font=('Arial', 21), bg='light blue', fg='white')
         temperature_label.grid(row=5, column=1, sticky='ew')
-        wind_label = Label(self.mainframe, text='Wind Speed:', font=('Arial', 21), bg='blue', fg='white')
+        wind_label = Label(self.mainframe, text='Wind Speed:', font=('Arial', 21), bg='light blue', fg='white')
         wind_label.grid(row=6, column=1, sticky='ew')
-        humidity_label = Label(self.mainframe, text='Humidity:', font=('Arial', 21), bg='blue', fg='white')
+        humidity_label = Label(self.mainframe, text='Humidity:', font=('Arial', 21), bg='light blue', fg='white')
         humidity_label.grid(row=7, column=1, sticky='ew')
-        date_label = Label(self.mainframe, text='Local Time:', font=('Arial', 21), bg='blue', fg='white')
+        date_label = Label(self.mainframe, text='Current Local Time:', font=('Arial', 21), bg='red', fg='white')
         date_label.grid(row=9, column=1, sticky='ew')
+        forecast_date_label = Label(self.mainframe, text='Forecast Time:', font=('Arial', 21), bg='orange', fg='white')
+        forecast_date_label.grid(row=10, column=1, sticky='ew')
         forecast_label = Label(self.mainframe, text='''Forecast
-    (3 - 117 hours)''', font=('Arial', 21), bg='blue', fg='white')
-        forecast_label.grid(row=9, column=3, sticky='ew')
+    (3 - 117 hours)''', font=('Arial', 21), bg='pink', fg='white')
+        forecast_label.grid(row=10, column=3, sticky='ew')
 
 
 
@@ -187,6 +191,15 @@ class Weather():
         date = local_time.strftime("%d/%m/%Y %H:%M:%S")
         date_text.insert(END, date)
         date_text.grid(row=9, column=2, sticky='ew')
+
+        f_date_text = Text(self.mainframe, height=2, width=20)
+        delta = int((forecast_hours // 3)*3)
+        forecast_time = utc_time + tz_offset + timedelta(hours=delta)
+        f_date = forecast_time.strftime("%d/%m/%Y %H:%M:%S")
+        f_date_text.insert(END, f_date)
+        f_date_text.grid(row=10, column=2, sticky='ew')
+
+
 
 
 if __name__=='__main__':
