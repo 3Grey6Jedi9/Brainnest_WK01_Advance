@@ -17,6 +17,7 @@ class Weather():
         self.build_grid()
         self.build_buttons()
         self.build_labels()
+        self.request_info()
 
 
     def build_grid(self):
@@ -42,7 +43,7 @@ class Weather():
         buttons_frame.grid(row=9, column=1, sticky='nsew', pady=10, padx=10)
         buttons_frame.columnconfigure(1, weight=1)
 
-        self.weather_info_button = tk.Button(buttons_frame, text='Weather Info')
+        self.weather_info_button = tk.Button(buttons_frame, text='Weather Info', command=self.request_info)
 
         self.weather_info_button.grid(row=9, column=1, sticky='ew')
 
@@ -61,6 +62,11 @@ class Weather():
         humidity_label.grid(row=6, column=1, sticky='ew')
         date_label = Label(self.mainframe, text='Date:', font=('Arial', 21), bg='blue', fg='white')
         date_label.grid(row=8, column=1, sticky='ew')
+
+
+    def request_info(self):
+        pass
+
 
 
 
