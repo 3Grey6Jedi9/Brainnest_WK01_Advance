@@ -23,6 +23,8 @@ class Weather():
         self.input_city.grid(row=0, column=2)
         self.input_country = Entry(self.mainframe)
         self.input_country.grid(row=1, column=2)
+        self.input_forecast = Entry(self.mainframe)
+        self.input_forecast.grid(row=10, column=3)
 
 
     def build_grid(self):
@@ -73,6 +75,9 @@ class Weather():
         humidity_label.grid(row=7, column=1, sticky='ew')
         date_label = Label(self.mainframe, text='Local Time:', font=('Arial', 21), bg='blue', fg='white')
         date_label.grid(row=9, column=1, sticky='ew')
+        forecast_label = Label(self.mainframe, text='''Forecast
+    (3 - 120 hours)''', font=('Arial', 21), bg='blue', fg='white')
+        forecast_label.grid(row=9, column=3, sticky='ew')
 
 
 
@@ -84,8 +89,6 @@ class Weather():
         api_key = my_weather_key
         city_name = self.input_city.get()
         country_code = self.input_country.get()
-        # city_name = 'Rome'
-        # country_code = 'IT'
         url = f'https://api.openweathermap.org/data/2.5/weather?q={city_name},{country_code}&appid={api_key}'
         res = requests.get(url)
         data = res.json()
@@ -133,16 +136,50 @@ class Weather():
 
 
     def forecast(self):
-        pass
+        #Making the API request
 
+        api_key = my_weather_key
+        city_name = self.input_city.get()
+        country_code = self.input_country.get()
+        url = f'https://api.openweathermap.org/data/2.5/forecast?q={city_name},{country_code}&appid={api_key}'
+        res = requests.get(url)
+        data = res.json()
+        print(data)
 
+        # Displaying the data
 
+        location_text = Text(self.mainframe, height=2, width=20)
+        location = 'Longitude: ' + str(data['coord']['lon']) + '  Latitude: ' + str(data['coord']['lat'])
+        location_text.insert(END, location)
+        location_text.grid(row=3, column=2, sticky='ew')
 
+        weather_text = Text(self.mainframe, height=2, width=20)
+        weather = str(data['weather'][0]['main']) + ' ' + '(' + data['weather'][0]['description'] + ')'
+        weather_text.insert(END, weather)
+        weather_text.grid(row=4, column=2, sticky='ew')
 
+        temperature_text = Text(self.mainframe, height=2, width=20)
+        temperature = str(round(data['main']['temp'] - 273.15, 2)) + 'ºC'
+        temperature_text.insert(END, temperature)
+        temperature_text.grid(row=5, column=2, sticky='ew')
 
+        wind_text = Text(self.mainframe, height=2, width=20)
+        wind_speed = str(data['wind']['speed']) + ' meters per second'
+        wind_text.insert(END, wind_speed)
+        wind_text.grid(row=6, column=2, sticky='ew')
 
+        humidity_text = Text(self.mainframe, height=2, width=20)
+        humidity = str(data['main']['humidity']) + ' grams of water vapor per cubic meter of air'
+        humidity_text.insert(END, humidity)
+        humidity_text.grid(row=7, column=2, sticky='ew')
 
-
+        date_text = Text(self.mainframe, height=2, width=20)
+        tz_offset = timedelta(seconds=data['timezone'])
+        utc_time = datetime.utcnow()
+        local_time = utc_time + tz_offset
+        date = local_time.strftime("%d/%m/%Y %H:%M:%S")
+        date_text.insert(END, date)
+        date_text.grid(row=9, column=2, sticky='ew')
 
 
 if __name__=='__main__':
