@@ -117,6 +117,22 @@ class Weather():
         weather_text.insert(END, weather)
         weather_text.grid(row=4, column=2, sticky='ew')
 
+        #Adding some pictures
+        weather_value = str(data['weather'][0]['main'])
+        weather_options = ['Clear', 'Clouds', 'Rain', 'Snow']
+        img_options = ['sunny.jpeg', 'cloudy.jpg', 'rainny.jpeg','snow.jpeg']
+        w_index = weather_options.index(weather_value)
+        img = img_options[w_index]
+        image_weather = Image.open(img)
+        resized_image = image_weather.resize((200,200))
+        tk_image_weather = ImageTk.PhotoImage(resized_image)
+        self.image_weather_label = Label(self.mainframe, image=tk_image_weather)
+        self.image_weather_label.image = tk_image_weather
+        self.image_weather_label.grid(row=4, column=3)
+
+
+        #-----------------------------------------------------------------------
+
         temperature_text = Text(self.mainframe, height=2, width=20)
         temperature = str(round(data['main']['temp'] - 273.15,2)) + 'ºC'
         temperature_text.insert(END, temperature)
@@ -180,6 +196,21 @@ class Weather():
         weather = str(f_data['weather'][0]['main']) + ' ' + '(' + f_data['weather'][0]['description'] + ')'
         weather_text.insert(END, weather)
         weather_text.grid(row=4, column=2, sticky='ew')
+
+        # Adding some pictures
+        weather_value = str(f_data['weather'][0]['main'])
+        weather_options = ['Clear', 'Clouds', 'Rain', 'Snow']
+        img_options = ['sunny.jpeg', 'cloudy.jpg', 'rainny.jpeg', 'snow.jpeg']
+        w_index = weather_options.index(weather_value)
+        img = img_options[w_index]
+        image_weather = Image.open(img)
+        resized_image = image_weather.resize((200, 200))
+        tk_image_weather = ImageTk.PhotoImage(resized_image)
+        self.image_weather_label = Label(self.mainframe, image=tk_image_weather)
+        self.image_weather_label.image = tk_image_weather
+        self.image_weather_label.grid(row=4, column=3)
+
+        # -----------------------------------------------------------------------
 
         temperature_text = Text(self.mainframe, height=2, width=20)
         temperature = str(round(f_data['main']['temp'] - 273.15, 2)) + 'ºC'
