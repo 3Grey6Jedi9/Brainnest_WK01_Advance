@@ -128,7 +128,7 @@ class Weather():
         tk_image_weather = ImageTk.PhotoImage(resized_image)
         self.image_weather_label = Label(self.mainframe, image=tk_image_weather)
         self.image_weather_label.image = tk_image_weather
-        self.image_weather_label.grid(row=4, column=3)
+        self.image_weather_label.grid(row=4, column=3, rowspan=4)
 
 
         #-----------------------------------------------------------------------
@@ -208,7 +208,7 @@ class Weather():
         tk_image_weather = ImageTk.PhotoImage(resized_image)
         self.image_weather_label = Label(self.mainframe, image=tk_image_weather)
         self.image_weather_label.image = tk_image_weather
-        self.image_weather_label.grid(row=4, column=3)
+        self.image_weather_label.grid(row=4, column=3, rowspan=4)
 
         # -----------------------------------------------------------------------
 
