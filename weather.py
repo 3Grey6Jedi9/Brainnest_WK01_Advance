@@ -30,7 +30,7 @@ class Weather():
         self.mainframe.columnconfigure(2, weight=1)
         self.mainframe.columnconfigure(3, weight=1)
         # Adding the rows
-        self.mainframe.rowconfigure(0, weight=0)
+        self.mainframe.rowconfigure(0, weight=1)
         self.mainframe.rowconfigure(1, weight=1)
         self.mainframe.rowconfigure(2, weight=1)
         self.mainframe.rowconfigure(3, weight=1)
@@ -39,17 +39,18 @@ class Weather():
         self.mainframe.rowconfigure(6, weight=1)
         self.mainframe.rowconfigure(7, weight=1)
         self.mainframe.rowconfigure(8, weight=1)
-        self.mainframe.rowconfigure(9, weight=0)
+        self.mainframe.rowconfigure(9, weight=1)
+        self.mainframe.rowconfigure(10, weight=1)
 
 
     def build_buttons(self):
         buttons_frame = tk.Frame(self.mainframe)
-        buttons_frame.grid(row=9, column=1, sticky='nsew', pady=10, padx=10)
+        buttons_frame.grid(row=10, column=1, sticky='nsew', pady=10, padx=10)
         buttons_frame.columnconfigure(1, weight=1)
 
         self.weather_info_button = tk.Button(buttons_frame, text='Weather Info', command=self.request_info)
 
-        self.weather_info_button.grid(row=9, column=1, sticky='ew')
+        self.weather_info_button.grid(row=10, column=1, sticky='nsew', pady=10, padx=10)
 
     def build_labels(self):
         city_label = Label(self.mainframe, text='City:', font=('Arial', 21), bg='blue', fg='white')
@@ -58,21 +59,22 @@ class Weather():
         country_label.grid(row=1, column=1, sticky='ew')
         location_label = Label(self.mainframe, text='Location:', font=('Arial', 21), bg='blue', fg='white')
         location_label.grid(row=3, column=1, sticky='ew')
+        weather_label = Label(self.mainframe, text='Weather:', font=('Arial', 21), bg='blue', fg='white')
+        weather_label.grid(row=4, column=1, sticky='ew')
         temperature_label = Label(self.mainframe, text='Temperature:', font=('Arial', 21), bg='blue', fg='white')
-        temperature_label.grid(row=4, column=1, sticky='ew')
+        temperature_label.grid(row=5, column=1, sticky='ew')
         wind_label = Label(self.mainframe, text='Wind Speed:', font=('Arial', 21), bg='blue', fg='white')
-        wind_label.grid(row=5, column=1, sticky='ew')
+        wind_label.grid(row=6, column=1, sticky='ew')
         humidity_label = Label(self.mainframe, text='Humidity:', font=('Arial', 21), bg='blue', fg='white')
-        humidity_label.grid(row=6, column=1, sticky='ew')
+        humidity_label.grid(row=7, column=1, sticky='ew')
         date_label = Label(self.mainframe, text='Date:', font=('Arial', 21), bg='blue', fg='white')
-        date_label.grid(row=8, column=1, sticky='ew')
+        date_label.grid(row=9, column=1, sticky='ew')
 
 
 
 
 
     def request_info(self):
-        self.button_clicked = True
         #Making the API request
 
         api_key = my_weather_key
@@ -83,33 +85,39 @@ class Weather():
         url = f'https://api.openweathermap.org/data/2.5/weather?q={city_name},{country_code}&appid={api_key}'
         res = requests.get(url)
         data = res.json()
+        print(data)
 
         #Displaying the data
 
         location_text = Text(self.mainframe, height=2, width=20)
-        location = data['coord']
+        location = 'Longitude: ' + str(data['coord']['lon']) + '  Latitude: ' + str(data['coord']['lat'])
         location_text.insert(END, location)
         location_text.grid(row=3, column=2, sticky='ew')
 
+        weather_text = Text(self.mainframe, height=2, width=20)
+        weather = str(data['weather'][0]['main']) + ' ' + '(' + data['weather'][0]['description'] + ')'
+        weather_text.insert(END, weather)
+        weather_text.grid(row=4, column=2, sticky='ew')
+
         temperature_text = Text(self.mainframe, height=2, width=20)
-        temperature = ''
+        temperature = str(round(data['main']['temp'] - 273.15,2)) + 'ºC'
         temperature_text.insert(END, temperature)
-        temperature_text.grid(row=4, column=2, sticky='ew')
+        temperature_text.grid(row=5, column=2, sticky='ew')
 
         wind_text = Text(self.mainframe, height=2, width=20)
-        wind_speed = ''
+        wind_speed = str(data['wind']['speed']) + ' meters per second'
         wind_text.insert(END, wind_speed)
-        wind_text.grid(row=5, column=2, sticky='ew')
+        wind_text.grid(row=6, column=2, sticky='ew')
 
         humidity_text = Text(self.mainframe, height=2, width=20)
-        humidity = ''
+        humidity = str(data['main']['humidity']) + ' grams of water vapor per cubic meter of air'
         humidity_text.insert(END, humidity)
-        humidity_text.grid(row=6, column=2, sticky='ew')
+        humidity_text.grid(row=7, column=2, sticky='ew')
 
         date_text = Text(self.mainframe, height=2, width=20)
         date = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
         date_text.insert(END, date)
-        date_text.grid(row=8, column=2, sticky='ew')
+        date_text.grid(row=9, column=2, sticky='ew')
 
 
 
