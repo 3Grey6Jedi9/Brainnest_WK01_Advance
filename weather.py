@@ -26,6 +26,13 @@ class Weather():
         self.input_forecast = Entry(self.mainframe)
         self.input_forecast.grid(row=11, column=3)
 
+        image_source = Image.open('source.jpeg')
+        tk_image_source = ImageTk.PhotoImage(image_source)
+        self.image_source_label = Label(self.mainframe, image=tk_image_source)
+        self.image_source_label.image = tk_image_source
+        self.image_source_label.grid(row=0, column=3)
+
+
 
     def build_grid(self):
         self.mainframe.columnconfigure(0, weight=1)
@@ -132,6 +139,11 @@ class Weather():
         date = local_time.strftime("%d/%m/%Y %H:%M:%S")
         date_text.insert(END, date)
         date_text.grid(row=9, column=2, sticky='ew')
+
+        f_date_text = Text(self.mainframe, height=2, width=20)
+        f_date = ''
+        f_date_text.insert(END, f_date)
+        f_date_text.grid(row=10, column=2, sticky='ew')
 
 
     def info(self):
