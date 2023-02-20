@@ -5,6 +5,7 @@ import requests
 import json
 from datetime import datetime, timedelta
 from key import my_weather_key
+import webbrowser
 
 class Weather():
 
@@ -47,6 +48,9 @@ class Weather():
 
         self.weather_info_button = tk.Button(self.mainframe, text='Weather Info', command=self.request_info)
         self.weather_info_button.grid(row=10, column=1, sticky='nsew', pady=10, padx=10)
+
+        self.country_codes_info_button = tk.Button(self.mainframe, text='Country Codes Info', command=self.info)
+        self.country_codes_info_button.grid(row=1, column=3, sticky='nsew', pady=10, padx=10)
 
 
     def build_labels(self):
@@ -118,6 +122,11 @@ class Weather():
         date = local_time.strftime("%d/%m/%Y %H:%M:%S")
         date_text.insert(END, date)
         date_text.grid(row=9, column=2, sticky='ew')
+
+
+    def info(self):
+        url = "https://www.iso.org/obp/ui/#search"
+        webbrowser.open_new_tab(url)
 
 
 
