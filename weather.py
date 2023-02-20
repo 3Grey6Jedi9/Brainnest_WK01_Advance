@@ -76,7 +76,7 @@ class Weather():
         date_label = Label(self.mainframe, text='Local Time:', font=('Arial', 21), bg='blue', fg='white')
         date_label.grid(row=9, column=1, sticky='ew')
         forecast_label = Label(self.mainframe, text='''Forecast
-    (3 - 120 hours)''', font=('Arial', 21), bg='blue', fg='white')
+    (3 - 117 hours)''', font=('Arial', 21), bg='blue', fg='white')
         forecast_label.grid(row=9, column=3, sticky='ew')
 
 
