@@ -17,7 +17,11 @@ class Weather():
         self.build_grid()
         self.build_buttons()
         self.build_labels()
-        self.input_data()
+
+        self.input_city = Entry(self.mainframe)
+        self.input_city.grid(row=0, column=2)
+        self.input_country = Entry(self.mainframe)
+        self.input_country.grid(row=1, column=2)
 
 
     def build_grid(self):
@@ -64,9 +68,26 @@ class Weather():
         date_label.grid(row=8, column=1, sticky='ew')
 
 
+
+
+
     def request_info(self):
+        self.button_clicked = True
+        #Making the API request
+
+        api_key = my_weather_key
+        city_name = self.input_city.get()
+        country_code = self.input_country.get()
+        # city_name = 'Rome'
+        # country_code = 'IT'
+        url = f'https://api.openweathermap.org/data/2.5/weather?q={city_name},{country_code}&appid={api_key}'
+        res = requests.get(url)
+        data = res.json()
+
+        #Displaying the data
+
         location_text = Text(self.mainframe, height=2, width=20)
-        location = ''
+        location = data['coord']
         location_text.insert(END, location)
         location_text.grid(row=3, column=2, sticky='ew')
 
@@ -82,7 +103,7 @@ class Weather():
 
         humidity_text = Text(self.mainframe, height=2, width=20)
         humidity = ''
-        humidity_text.insert(END, location)
+        humidity_text.insert(END, humidity)
         humidity_text.grid(row=6, column=2, sticky='ew')
 
         date_text = Text(self.mainframe, height=2, width=20)
@@ -92,14 +113,7 @@ class Weather():
 
 
 
-    def input_data(self):
-        city_entry = Entry(self.mainframe)
-        city_entry.grid(row=0, column=2)
-        city_input = city_entry.get()
 
-        country_entry = Entry(self.mainframe)
-        country_entry.grid(row=1, column=2)
-        country_input = country_entry.get()
 
 
 
@@ -111,4 +125,3 @@ if __name__=='__main__':
     root = tk.Tk()
     Weather(root)
     root.mainloop()
-
