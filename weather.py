@@ -44,13 +44,10 @@ class Weather():
 
 
     def build_buttons(self):
-        buttons_frame = tk.Frame(self.mainframe)
-        buttons_frame.grid(row=10, column=1, sticky='nsew', pady=10, padx=10)
-        buttons_frame.columnconfigure(1, weight=1)
 
-        self.weather_info_button = tk.Button(buttons_frame, text='Weather Info', command=self.request_info)
-
+        self.weather_info_button = tk.Button(self.mainframe, text='Weather Info', command=self.request_info)
         self.weather_info_button.grid(row=10, column=1, sticky='nsew', pady=10, padx=10)
+
 
     def build_labels(self):
         city_label = Label(self.mainframe, text='City:', font=('Arial', 21), bg='blue', fg='white')
