@@ -17,6 +17,7 @@ class Weather():
         self.build_grid()
         self.build_buttons()
         self.build_labels()
+        self.input_data()
 
 
     def build_grid(self):
@@ -65,13 +66,41 @@ class Weather():
 
     def request_info(self):
         location_text = Text(self.mainframe, height=2, width=20)
-        location = 'Super cool Example'
+        location = ''
         location_text.insert(END, location)
         location_text.grid(row=3, column=2, sticky='ew')
 
+        temperature_text = Text(self.mainframe, height=2, width=20)
+        temperature = ''
+        temperature_text.insert(END, temperature)
+        temperature_text.grid(row=4, column=2, sticky='ew')
+
+        wind_text = Text(self.mainframe, height=2, width=20)
+        wind_speed = ''
+        wind_text.insert(END, wind_speed)
+        wind_text.grid(row=5, column=2, sticky='ew')
+
+        humidity_text = Text(self.mainframe, height=2, width=20)
+        humidity = ''
+        humidity_text.insert(END, location)
+        humidity_text.grid(row=6, column=2, sticky='ew')
+
+        date_text = Text(self.mainframe, height=2, width=20)
+        date = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        date_text.insert(END, date)
+        date_text.grid(row=8, column=2, sticky='ew')
+
+
 
     def input_data(self):
-        pass
+        city_entry = Entry(self.mainframe)
+        city_entry.grid(row=0, column=2)
+        city_input = city_entry.get()
+
+        country_entry = Entry(self.mainframe)
+        country_entry.grid(row=1, column=2)
+        country_input = country_entry.get()
+
 
 
 
