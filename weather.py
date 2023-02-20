@@ -47,7 +47,8 @@ class Weather():
         self.weather_info_button.grid(row=9, column=1, sticky='ew')
 
     def build_labels(self):
-        pass
+        city_label = Label(self.mainframe, text='City:', font=('Arial', 21))
+        city_label.grid(row=0, column=1, sticky='ew')
 
 
 
