@@ -3,7 +3,7 @@ from tkinter import *
 from PIL import ImageTk, Image
 import requests
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from key import my_weather_key
 
 class Weather():
@@ -67,7 +67,7 @@ class Weather():
         wind_label.grid(row=6, column=1, sticky='ew')
         humidity_label = Label(self.mainframe, text='Humidity:', font=('Arial', 21), bg='blue', fg='white')
         humidity_label.grid(row=7, column=1, sticky='ew')
-        date_label = Label(self.mainframe, text='Date:', font=('Arial', 21), bg='blue', fg='white')
+        date_label = Label(self.mainframe, text='Local Time:', font=('Arial', 21), bg='blue', fg='white')
         date_label.grid(row=9, column=1, sticky='ew')
 
 
@@ -115,7 +115,10 @@ class Weather():
         humidity_text.grid(row=7, column=2, sticky='ew')
 
         date_text = Text(self.mainframe, height=2, width=20)
-        date = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        tz_offset = timedelta(seconds=data['timezone'])
+        utc_time = datetime.utcnow()
+        local_time = utc_time + tz_offset
+        date = local_time.strftime("%d/%m/%Y %H:%M:%S")
         date_text.insert(END, date)
         date_text.grid(row=9, column=2, sticky='ew')
 
