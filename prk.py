@@ -10,6 +10,8 @@ forecast = {'cod': '200', 'message': 0, 'cnt': 40,
 
 
 
-print(forecast['list'][1])
+
+
+print(forecast['list'][35]['weather'][0]['main'])
 
 # index 1 forecast for the next 3 hours and so on ...
